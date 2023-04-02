@@ -45,7 +45,7 @@ export default function ProjectPage() {
           and developer marketing.
         </p>
         <div className="flex flex-col gap-2 md:flex-row md:gap-2">
-          <a
+          {/* <a
             rel="noopener noreferrer"
             target="_blank"
             href="https://twitter.com/leeerob"
@@ -56,11 +56,11 @@ export default function ProjectPage() {
               <div className="ml-3">Twitter</div>
             </div>
             <ArrowIcon />
-          </a>
+          </a> */}
           <a
             rel="noopener noreferrer"
             target="_blank"
-            href="https://github.com/leerob"
+            href="https://github.com/simonkaring"
             className="flex w-full border border-neutral-200 dark:border-neutral-800 rounded-lg p-4 no-underline items-center text-neutral-800 dark:text-neutral-200 hover:dark:bg-neutral-900 hover:bg-neutral-100 transition-all justify-between"
           >
             <div className="flex items-center">
@@ -69,7 +69,7 @@ export default function ProjectPage() {
             </div>
             <ArrowIcon />
           </a>
-          <a
+          {/* <a
             rel="noopener noreferrer"
             target="_blank"
             href="https://www.youtube.com/@leerob"
@@ -80,7 +80,7 @@ export default function ProjectPage() {
               <div className="ml-3">YouTube</div>
             </div>
             <ArrowIcon />
-          </a>
+          </a> */}
         </div>
       </div>
     </section>
