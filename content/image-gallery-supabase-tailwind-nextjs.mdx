@@ -1,6 +1,6 @@
 ---
 title: Building an Image Gallery with Next.js, Supabase, and Tailwind CSS
-publishedAt: '2022-03-28'
+publishedAt: "2022-03-28"
 summary: Learn how to create an image gallery with dynamic content from a PostgreSQL database, with support for content updates without needing to redeploy.
 ---
 
@@ -86,13 +86,13 @@ Then, we can update our `tailwind.config.js` file:
 ```js title="tailwind.config.js"
 module.exports = {
   content: [
-    './pages/**/*.{js,ts,jsx,tsx}',
-    './components/**/*.{js,ts,jsx,tsx}',
+    "./pages/**/*.{js,ts,jsx,tsx}",
+    "./components/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
     extend: {},
   },
-  plugins: [require('@tailwindcss/aspect-ratio')],
+  plugins: [require("@tailwindcss/aspect-ratio")],
 };
 ```
 
@@ -107,7 +107,7 @@ To help achieve good [Core Web Vitals](https://nextjs.org/learn/seo/web-performa
 Let's update our `Image` component to use `next/image`, and rename it to `BlurImage` to prevent a naming collison with the `Image` component we imported:
 
 ```jsx {1,7-13} title="pages/index.tsx"
-import Image from 'next/image';
+import Image from "next/image";
 
 function BlurImage() {
   return (
@@ -137,7 +137,7 @@ The Next.js Image component requires an allowlist to specify which domains we ca
 module.exports = {
   reactStrictMode: true,
   images: {
-    domains: ['bit.ly'],
+    domains: ["bit.ly"],
   },
 };
 ```
@@ -147,11 +147,11 @@ module.exports = {
 When images are loading, we'd like to show a blurred version for a better user experience. While the Image component does include this for [local image files](https://nextjs.org/docs/basic-features/image-optimization#local-images), we're going to be retrieving images from Supabase soon. Instead, we can use `onLoadingComplete` and CSS animation + blur to achieve a similar effect.
 
 ```jsx {2,4-6,9,19-25} title="pages/index.tsx"
-import Image from 'next/image';
-import { useState } from 'react';
+import Image from "next/image";
+import { useState } from "react";
 
 function cn(...classes: string[]) {
-  return classes.filter(Boolean).join(' ');
+  return classes.filter(Boolean).join(" ");
 }
 
 function BlurImage() {
@@ -166,10 +166,10 @@ function BlurImage() {
           layout="fill"
           objectFit="cover"
           className={cn(
-            'group-hover:opacity-75 duration-700 ease-in-out',
+            "group-hover:opacity-75 duration-700 ease-in-out",
             isLoading
-              ? 'grayscale blur-2xl scale-110'
-              : 'grayscale-0 blur-0 scale-100'
+              ? "grayscale blur-2xl scale-110"
+              : "grayscale-0 blur-0 scale-100"
           )}
           onLoadingComplete={() => setLoading(false)}
         />
@@ -212,7 +212,7 @@ npm i @supabase/supabase-js
 Finally, we can create a new client and connect to Supabase using our environment variables:
 
 ```jsx title="pages/index.tsx"
-import { createClient } from '@supabase/supabase-js';
+import { createClient } from "@supabase/supabase-js";
 
 const supabaseAdmin = createClient(
   process.env.NEXT_PUBLIC_SUPABASE_URL,
@@ -252,7 +252,7 @@ await supabaseAdmin.from('images').insert([{
 We've already set up our Supabase client in the file, so we can `select` all images from our `images` table:
 
 ```jsx
-const { data } = await supabaseAdmin.from('images').select('*');
+const { data } = await supabaseAdmin.from("images").select("*");
 ```
 
 We'll fetch this data inside `getStaticProps`. [This function](https://nextjs.org/docs/basic-features/data-fetching/get-static-props) allows you to fetch data on the server and return it as props for the default React component exported in the Page:
@@ -324,10 +324,10 @@ function BlurImage({ image }: { image: Image }) {
           layout="fill"
           objectFit="cover"
           className={cn(
-            'group-hover:opacity-75 duration-700 ease-in-out',
+            "group-hover:opacity-75 duration-700 ease-in-out",
             isLoading
-              ? 'grayscale blur-2xl scale-110'
-              : 'grayscale-0 blur-0 scale-100'
+              ? "grayscale blur-2xl scale-110"
+              : "grayscale-0 blur-0 scale-100"
           )}
           onLoadingComplete={() => setLoading(false)}
         />
@@ -346,7 +346,7 @@ Finally, we'll want to update our image optimization allowlist to use the Twitte
 module.exports = {
   reactStrictMode: true,
   images: {
-    domains: ['pbs.twimg.com'],
+    domains: ["pbs.twimg.com"],
   },
 };
 ```
@@ -390,17 +390,17 @@ Inside our Next.js application, we'll make a new API Route to revalidate our pag
 export default async function handler(req, res) {
   // Check for secret to confirm this is a valid request
   if (req.query.secret !== process.env.REVALIDATE_SECRET) {
-    return res.status(401).json({ message: 'Invalid token' });
+    return res.status(401).json({ message: "Invalid token" });
   }
 
   try {
     // Regenerate our index route showing the images
-    await res.revalidate('/');
+    await res.revalidate("/");
     return res.json({ revalidated: true });
   } catch (err) {
     // If there was an error, Next.js will continue
     // to show the last successfully generated page
-    return res.status(500).send('Error revalidating');
+    return res.status(500).send("Error revalidating");
   }
 }
 ```

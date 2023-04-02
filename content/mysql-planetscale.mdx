@@ -1,7 +1,7 @@
 ---
-title: 'From Firebase/Redis to MySQL with PlanetScale'
-publishedAt: '2021-09-06'
-summary: 'Learn how I migrated my Next.js website to use MySQL with PlanetScale, resulting in 10x faster response times for my APIs.'
+title: "From Firebase/Redis to MySQL with PlanetScale"
+publishedAt: "2021-09-06"
+summary: "Learn how I migrated my Next.js website to use MySQL with PlanetScale, resulting in 10x faster response times for my APIs."
 ---
 
 A few weeks ago, I [moved this site](https://github.com/leerob/leerob.io/pull/326) from using [Firebase](/blog/real-time-post-views) and [Redis](/blog/serverless-redis-nextjs) to PlanetScale. [PlanetScale](https://planetscale.com) is a serverless database platform built on MySQL and Vitess. Here's why I picked PlanetScale:
@@ -26,7 +26,7 @@ Both Firebase and Redis (through [Upstash](https://upstash.com/)) are easy to ge
 I found myself writing JavaScript in places where SQL has the functionality built-in. For example, I used Firebase to fetch a JSON object `views` and then summed the values together to find the total number of views.
 
 ```jsx
-const snapshot = await db.ref('views').once('value');
+const snapshot = await db.ref("views").once("value");
 const views = snapshot.val();
 const allViews = Object.values(views).reduce((total, value) => total + value);
 ```
@@ -85,36 +85,36 @@ There are likely better ways to do this, but my hacky solution to migrate data i
 Here are the two scripts I used, for reference.
 
 ```jsx title="pages/api/migrate-redis.js"
-import db from 'lib/planetscale';
-import guestbookData from 'data/guestbook';
+import db from "lib/planetscale";
+import guestbookData from "data/guestbook";
 
 export default async function handler(req, res) {
   const toISOString = (unixTimestampInMs) =>
-    new Date(unixTimestampInMs).toJSON().slice(0, 19).replace('T', ' ');
+    new Date(unixTimestampInMs).toJSON().slice(0, 19).replace("T", " ");
 
   let query = `INSERT INTO guestbook (email, updated_at, body, created_by)
     VALUES `;
 
   const escapeStr = (str) =>
     str
-      .replace(/\\/g, '\\\\')
-      .replace(/\$/g, '\\$')
+      .replace(/\\/g, "\\\\")
+      .replace(/\$/g, "\\$")
       .replace(/'/g, "\\'")
       .replace(/"/g, '\\"');
 
   guestbookData.forEach((item, key) => {
-    var value = JSON.parse(item['value']);
+    var value = JSON.parse(item["value"]);
 
     query += `("${
-      value.email ? `${value.email}` : 'not@provided.com'
+      value.email ? `${value.email}` : "not@provided.com"
     }", "${toISOString(value.updated_at)}", "${escapeStr(value.body)}", "${
       value.created_by
     }")`;
 
     if (key === guestbookData.length - 1) {
-      query += ';';
+      query += ";";
     } else {
-      query += ', ';
+      query += ", ";
     }
   });
 
@@ -125,24 +125,24 @@ export default async function handler(req, res) {
 ```
 
 ```jsx title="pages/api/migrate-firebase.js"
-import db from 'lib/planetscale';
-import viewsData from 'data/views';
+import db from "lib/planetscale";
+import viewsData from "data/views";
 
 export default async function handler(req, res) {
   let query = `INSERT INTO views (slug, count)
     VALUES `;
 
-  const slugs = Object.keys(viewsData['views']);
+  const slugs = Object.keys(viewsData["views"]);
 
   slugs.forEach((slug, key) => {
-    const count = viewsData['views'][slug];
+    const count = viewsData["views"][slug];
 
     query += `("${slug}", ${count})`;
 
     if (key === slugs.length - 1) {
-      query += ';';
+      query += ";";
     } else {
-      query += ', ';
+      query += ", ";
     }
   });
 

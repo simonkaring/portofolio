@@ -1,7 +1,7 @@
 ---
 title: "Things I've Learned Building Next.js Apps"
-publishedAt: '2019-02-15'
-summary: 'CSS Modules, Font Loading, Polyfills, Dynamic Imports, MDX, and more!'
+publishedAt: "2019-02-15"
+summary: "CSS Modules, Font Loading, Polyfills, Dynamic Imports, MDX, and more!"
 ---
 
 I've spent a lot of time in the past 4 months creating [Next.js](https://nextjs.org/) apps for both work and personal use.
@@ -27,11 +27,11 @@ By using `@font-face` in combination with the `font-display` [attribute](https:/
 
 ```css
 @font-face {
-  font-family: 'Inter';
+  font-family: "Inter";
   font-style: normal;
   font-weight: 100 900;
   font-display: optional;
-  src: url(/fonts/inter-var-latin.woff2) format('woff2');
+  src: url(/fonts/inter-var-latin.woff2) format("woff2");
   unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA,
     U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215,
     U+FEFF, U+FFFD;
@@ -51,9 +51,9 @@ When SSR this component, it simply did not work in Safari. Until that bug is fix
 to Next's [Dynamic Imports](https://nextjs.org/docs/#dynamic-import), it's easy to import a component and disable SSR.
 
 ```jsx
-import dynamic from 'next/dynamic';
+import dynamic from "next/dynamic";
 
-const ReactSelectNoSSR = dynamic(() => import('../components/select'), {
+const ReactSelectNoSSR = dynamic(() => import("../components/select"), {
   ssr: false,
 });
 
@@ -69,7 +69,7 @@ export default () => (
 While this works, we can go a step further and provide a [loading placeholder](/blog/loading-placeholder-with-sass) to make the user experience better.
 
 ```jsx
-const ReactSelectNoSSR = dynamic(() => import('../components/select'), {
+const ReactSelectNoSSR = dynamic(() => import("../components/select"), {
   loading: () => <Input />,
   ssr: false,
 });

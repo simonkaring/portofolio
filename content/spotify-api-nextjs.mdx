@@ -1,7 +1,7 @@
 ---
-title: 'Using the Spotify API with Next.js'
-publishedAt: '2020-07-21'
-summary: 'Learn how to authenticate with the Spotify API to fetch your top tracks in a Next.js API route.'
+title: "Using the Spotify API with Next.js"
+publishedAt: "2020-07-21"
+summary: "Learn how to authenticate with the Spotify API to fetch your top tracks in a Next.js API route."
 ---
 
 I wanted to display what song I'm currently listening to on my site, as well as my top tracks.
@@ -69,24 +69,24 @@ SPOTIFY_REFRESH_TOKEN=
 We can now request an access token using our client ID, client secret, and `refresh_token`.
 
 ```js title="lib/spotify.js"
-import querystring from 'querystring';
+import querystring from "querystring";
 
 const client_id = process.env.SPOTIFY_CLIENT_ID;
 const client_secret = process.env.SPOTIFY_CLIENT_SECRET;
 const refresh_token = process.env.SPOTIFY_REFRESH_TOKEN;
 
-const basic = Buffer.from(`${client_id}:${client_secret}`).toString('base64');
+const basic = Buffer.from(`${client_id}:${client_secret}`).toString("base64");
 const TOKEN_ENDPOINT = `https://accounts.spotify.com/api/token`;
 
 const getAccessToken = async () => {
   const response = await fetch(TOKEN_ENDPOINT, {
-    method: 'POST',
+    method: "POST",
     headers: {
       Authorization: `Basic ${basic}`,
-      'Content-Type': 'application/x-www-form-urlencoded',
+      "Content-Type": "application/x-www-form-urlencoded",
     },
     body: querystring.stringify({
-      grant_type: 'refresh_token',
+      grant_type: "refresh_token",
       refresh_token,
     }),
   });
@@ -119,14 +119,14 @@ First, create a new file at `pages/api/top-tracks.js`.
 Then, import the new function `getTopTracks`.
 
 ```js title="pages/api/top-tracks.js"
-import { getTopTracks } from '../../lib/spotify';
+import { getTopTracks } from "../../lib/spotify";
 
 export default async (_, res) => {
   const response = await getTopTracks();
   const { items } = await response.json();
 
   const tracks = items.slice(0, 10).map((track) => ({
-    artist: track.artists.map((_artist) => _artist.name).join(', '),
+    artist: track.artists.map((_artist) => _artist.name).join(", "),
     songUrl: track.external_urls.spotify,
     title: track.name,
   }));

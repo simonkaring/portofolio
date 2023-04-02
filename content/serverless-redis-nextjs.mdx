@@ -1,6 +1,6 @@
 ---
-title: 'Using Serverless Redis with Next.js'
-publishedAt: '2021-03-19'
+title: "Using Serverless Redis with Next.js"
+publishedAt: "2021-03-19"
 summary: "Did you know it's possible to use Redis for your entire database? Hashmaps, counters, sorted lists, and even queues. Learn how to deploy a Redis & Next.js app in a few short minutes."
 ---
 
@@ -47,7 +47,7 @@ REDIS_URL=redis://:password@endpoint:port
 We'll use [ioredis](https://github.com/luin/ioredis), a Node.js Redis client with [async/await](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/async_function) support, to connect to Redis.
 
 ```jsx title="lib/redis.js"
-import Redis from 'ioredis';
+import Redis from "ioredis";
 
 const redis = new Redis(process.env.REDIS_URL);
 
@@ -57,9 +57,9 @@ export default redis;
 Finally, we can use this inside any page or API Route to retrieve information from Redis.
 
 ```jsx
-import redis from 'lib/redis';
+import redis from "lib/redis";
 
-const value = JSON.parse(await redis.hget('feedback', id));
+const value = JSON.parse(await redis.hget("feedback", id));
 ```
 
 ### Using Redis with Next.js

@@ -1,13 +1,13 @@
-import Link from 'next/link';
-import Image from 'next/image';
-import { getBlogViews, getTweetCount, getStarCount } from 'lib/metrics';
+import Link from "next/link";
+import Image from "next/image";
+import { getBlogViews, getTweetCount, getStarCount } from "lib/metrics";
 import {
   ArrowIcon,
   GitHubIcon,
   TwitterIcon,
   ViewsIcon,
-} from 'components/icons';
-import { name, about, bio, avatar } from 'lib/info';
+} from "components/icons";
+import { name, about, bio, avatar } from "lib/info";
 
 export const revalidate = 60;
 

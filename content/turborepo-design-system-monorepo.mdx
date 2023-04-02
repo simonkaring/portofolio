@@ -1,7 +1,7 @@
 ---
-title: 'Building a Design System Monorepo with Turborepo'
-publishedAt: '2019-03-29'
-summary: 'Manage multiple packages with a shared build, test, and release process using Turborepo, Changesets, Storybook, and more.'
+title: "Building a Design System Monorepo with Turborepo"
+publishedAt: "2019-03-29"
+summary: "Manage multiple packages with a shared build, test, and release process using Turborepo, Changesets, Storybook, and more."
 ---
 
 This guide explains how to use a React design system starter powered by:
@@ -98,7 +98,7 @@ acme-core
 Each file inside of `acme-core/src` is a component inside our design system. For example:
 
 ```tsx title="acme-core/src/Button.tsx"
-import * as React from 'react';
+import * as React from "react";
 
 export interface ButtonProps {
   children: React.ReactNode;
@@ -108,14 +108,14 @@ export function Button(props: ButtonProps) {
   return <button>{props.children}</button>;
 }
 
-Button.displayName = 'Button';
+Button.displayName = "Button";
 ```
 
 When adding a new file, ensure the component is also exported from the entry `index.tsx` file:
 
 ```tsx title="acme-core/src/index.tsx"
-import * as React from 'react';
-export { Button, type ButtonProps } from './Button';
+import * as React from "react";
+export { Button, type ButtonProps } from "./Button";
 // Add new component exports here
 ```
 

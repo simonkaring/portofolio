@@ -1,6 +1,6 @@
 ---
-title: 'How To Print in React Using Iframes'
-publishedAt: '2019-06-04'
+title: "How To Print in React Using Iframes"
+publishedAt: "2019-06-04"
 summary: "Learn how to use iframes to print React components while only printing what's necessary."
 ---
 
@@ -42,7 +42,7 @@ First, let's create an `iframe` that routes to our receipt.
 <iframe
   id="receipt"
   src="/payment/receipt"
-  style={{ display: 'none' }}
+  style={{ display: "none" }}
   title="Receipt"
 />
 ```
@@ -51,7 +51,7 @@ We need to ensure the contents of that route have loaded, otherwise the page wil
 We can communicate with the `iframe` from the receipt route to let it know we've finished loading.
 
 ```js
-parent.postMessage({ action: 'receipt-loaded' });
+parent.postMessage({ action: "receipt-loaded" });
 ```
 
 Finally, we need a way to invoke the print dialog.
@@ -59,13 +59,13 @@ Let's create a component which sets up an event listener for the `receipt-loaded
 When the route has finished loading, we can click the `button`.
 
 ```js
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from "react";
 
 function PaymentConfirmation() {
   const [isLoading, setIsLoading] = useState(true);
 
   const handleMessage = (event) => {
-    if (event.data.action === 'receipt-loaded') {
+    if (event.data.action === "receipt-loaded") {
       setIsLoading(false);
     }
   };
@@ -83,10 +83,10 @@ function PaymentConfirmation() {
   };
 
   useEffect(() => {
-    window.addEventListener('message', handleMessage);
+    window.addEventListener("message", handleMessage);
 
     return () => {
-      window.removeEventListener('message', handleMessage);
+      window.removeEventListener("message", handleMessage);
     };
   }, []);
 
@@ -95,11 +95,11 @@ function PaymentConfirmation() {
       <iframe
         id="receipt"
         src="/payment/receipt"
-        style={{ display: 'none' }}
+        style={{ display: "none" }}
         title="Receipt"
       />
-      <button onClick={() => printIframe('receipt')}>
-        {isLoading ? 'Loading...' : 'Print Receipt'}
+      <button onClick={() => printIframe("receipt")}>
+        {isLoading ? "Loading..." : "Print Receipt"}
       </button>
     </>
   );

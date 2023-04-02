@@ -1,14 +1,14 @@
-import type { Metadata } from 'next';
+import type { Metadata } from "next";
 import {
   GitHubIcon,
   YoutubeIcon,
   ArrowIcon,
   TwitterIcon,
-} from 'components/icons';
+} from "components/icons";
 
 export const metadata: Metadata = {
-  title: 'About',
-  description: 'VP of Developer Experience at Vercel.',
+  title: "About",
+  description: "VP of Developer Experience at Vercel.",
 };
 
 export default function AboutPage() {
@@ -21,7 +21,7 @@ export default function AboutPage() {
       <div className="prose prose-neutral dark:prose-invert text-neutral-800 dark:text-neutral-200">
         <p>
           I'm currently the <b>VP of Developer Experience at Vercel</b>, where I
-          lead our Developer Relations and Documentation teams. I focus on{' '}
+          lead our Developer Relations and Documentation teams. I focus on{" "}
           <b>educating and growing</b> the Vercel and Next.js communities.
         </p>
         <hr />

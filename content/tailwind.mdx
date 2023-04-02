@@ -1,7 +1,7 @@
 ---
-title: 'Switching to Tailwind CSS'
-publishedAt: '2020-12-14'
-summary: 'Learn why I switched my Next.js blog to use Tailwind CSS and how it impacted performance.'
+title: "Switching to Tailwind CSS"
+publishedAt: "2020-12-14"
+summary: "Learn why I switched my Next.js blog to use Tailwind CSS and how it impacted performance."
 ---
 
 My site is an opportunity to try new tech and form opinions on what I enjoy using. I learn best by building real things. After some evaluation, I've landed on the following tech stack:
@@ -54,7 +54,7 @@ translates to these utility classes with Tailwind:
 The Tailwind classes feel intuitive and their documentation makes it easy. The underlying idea of being bound to a design system made plenty of sense coming from Chakra UI. For example:
 
 ```jsx
-import { Flex } from '@chakra-ui/react';
+import { Flex } from "@chakra-ui/react";
 
 <Flex px={4} py={2} />;
 ```
@@ -78,7 +78,7 @@ Tailwind 2.0 makes using dark mode painless. Enable the `dark` [variant](https:/
 I was able to keep a [dark mode toggle](https://github.com/leerob/leerob.io/blob/91233631f0e1a193295ffc54d2291f3109060007/components/Container.tsx) in the navigation thanks to [next-themes](https://github.com/pacocoursey/next-themes). Tailwind and `next-themes` [pair well](https://github.com/pacocoursey/next-themes#with-tailwind) together.
 
 ```jsx
-import { useTheme } from 'next-themes';
+import { useTheme } from "next-themes";
 
 const ThemeChanger = () => {
   const { theme, setTheme } = useTheme();
@@ -86,8 +86,8 @@ const ThemeChanger = () => {
   return (
     <div>
       The current theme is: {theme}
-      <button onClick={() => setTheme('light')}>Light Mode</button>
-      <button onClick={() => setTheme('dark')}>Dark Mode</button>
+      <button onClick={() => setTheme("light")}>Light Mode</button>
+      <button onClick={() => setTheme("dark")}>Dark Mode</button>
     </div>
   );
 };
@@ -131,8 +131,8 @@ I added [absolute Imports and module path aliases](https://nextjs.org/docs/advan
 
 ```jsx
 // Before
-import db from '../../lib/db-admin';
+import db from "../../lib/db-admin";
 
 // After
-import db from 'lib/db-admin';
+import db from "lib/db-admin";
 ```

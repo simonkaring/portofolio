@@ -1,7 +1,7 @@
 ---
-title: 'Real-Time Blog Post Views With Next.js and Firebase'
-publishedAt: '2019-08-21'
-summary: 'Want more accurate page view counts? Learn how to track real-time post views using Firebase and Next.js.'
+title: "Real-Time Blog Post Views With Next.js and Firebase"
+publishedAt: "2019-08-21"
+summary: "Want more accurate page view counts? Learn how to track real-time post views using Firebase and Next.js."
 ---
 
 One metric for a website's success is the amount of traffic it receives.
@@ -80,14 +80,14 @@ You will need to restart your application to load new environment variables.
 Create a new file `lib/firebase.js` to initialize the application and establish a connection.
 
 ```js title="lib/firebase.js"
-import * as admin from 'firebase-admin';
+import * as admin from "firebase-admin";
 
 if (!admin.apps.length) {
   admin.initializeApp({
     credential: admin.credential.cert({
       projectId: process.env.NEXT_PUBLIC_FIREBASE_PROJECT_ID,
       clientEmail: process.env.FIREBASE_CLIENT_EMAIL,
-      privateKey: process.env.FIREBASE_PRIVATE_KEY.replace(/\\n/g, '\n'),
+      privateKey: process.env.FIREBASE_PRIVATE_KEY.replace(/\\n/g, "\n"),
     }),
   });
 }
@@ -106,11 +106,11 @@ to communicate with our database and increment the views for a given `id`.
 All you need to get started is an `api/` folder inside your main `pages/` folder where your routes live. Every file inside `pages/api/` is mapped to `/api/*`.
 
 ```js title="pages/api/views/[slug].js"
-import { db } from '../../lib/firebase';
+import { db } from "../../lib/firebase";
 
 export default async (req, res) => {
-  if (req.method === 'POST') {
-    const ref = db.ref('views').child(req.query.slug);
+  if (req.method === "POST") {
+    const ref = db.ref("views").child(req.query.slug);
     const { snapshot } = await ref.transaction((currentViews) => {
       if (currentViews === null) {
         return 1;
@@ -160,11 +160,11 @@ yarn add swr
 Next, we need to update our API Route to fetch the views for a given post.
 
 ```js title="pages/api/views/[slug].js"
-import { db } from '../../lib/firebase';
+import { db } from "../../lib/firebase";
 
 export default async (req, res) => {
-  if (req.method === 'POST') {
-    const ref = db.ref('views').child(req.query.slug);
+  if (req.method === "POST") {
+    const ref = db.ref("views").child(req.query.slug);
     const { snapshot } = await ref.transaction((currentViews) => {
       if (currentViews === null) {
         return 1;
@@ -178,8 +178,8 @@ export default async (req, res) => {
     });
   }
 
-  if (req.method === 'GET') {
-    const snapshot = await db.ref('views').child(req.query.slug).once('value');
+  if (req.method === "GET") {
+    const snapshot = await db.ref("views").child(req.query.slug).once("value");
     const views = snapshot.val();
 
     return res.status(200).json({ total: views });
@@ -192,8 +192,8 @@ export default async (req, res) => {
 Let's create a `ViewCounter` component to use SWR.
 
 ```jsx title="components/ViewCounter.js"
-import { useEffect } from 'react';
-import useSWR from 'swr';
+import { useEffect } from "react";
+import useSWR from "swr";
 
 async function fetcher(...args) {
   const res = await fetch(...args);
@@ -208,13 +208,13 @@ export default function ViewCounter({ slug }) {
   useEffect(() => {
     const registerView = () =>
       fetch(`/api/views/${slug}`, {
-        method: 'POST',
+        method: "POST",
       });
 
     registerView();
   }, [slug]);
 
-  return `${views > 0 ? views.toLocaleString() : '–––'} views`;
+  return `${views > 0 ? views.toLocaleString() : "–––"} views`;
 }
 ```
 

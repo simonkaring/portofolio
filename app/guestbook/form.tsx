@@ -1,7 +1,7 @@
-'use client';
+"use client";
 
-import { useRouter } from 'next/navigation';
-import { useState, useTransition } from 'react';
+import { useRouter } from "next/navigation";
+import { useState, useTransition } from "react";
 
 export default function Form() {
   const router = useRouter();
@@ -14,19 +14,19 @@ export default function Form() {
     setIsFetching(true);
 
     const form = e.currentTarget;
-    const input = form.elements.namedItem('entry') as HTMLInputElement;
+    const input = form.elements.namedItem("entry") as HTMLInputElement;
 
-    const res = await fetch('/api/guestbook', {
+    const res = await fetch("/api/guestbook", {
       body: JSON.stringify({
         body: input.value,
       }),
       headers: {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
       },
-      method: 'POST',
+      method: "POST",
     });
 
-    input.value = '';
+    input.value = "";
     const { error } = await res.json();
 
     setIsFetching(false);

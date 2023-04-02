@@ -1,6 +1,6 @@
-import me from '../app/avatar.jpg';
+import me from "../app/avatar.jpg";
 
-export const name = 'Lee Robinson';
+export const name = "Lee Robinson";
 export const avatar = me;
 export const about = () => {
   return (
