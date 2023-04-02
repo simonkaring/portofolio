@@ -1,24 +1,27 @@
-"use client";
+'use client'
 
-import clsx from "clsx";
-import { usePathname } from "next/navigation";
-import Link from "next/link";
-import { LayoutGroup, motion } from "framer-motion";
+import clsx from 'clsx'
+import { usePathname } from 'next/navigation'
+import Link from 'next/link'
+import { LayoutGroup, motion } from 'framer-motion'
 
 const navItems = {
-  "/": {
-    name: "home",
+  '/': {
+    name: 'home',
   },
-  "/about": {
-    name: "about",
+  '/about': {
+    name: 'about',
   },
-  "/blog": {
-    name: "blog",
+  '/projects': {
+    name: 'projects',
   },
-  "/guestbook": {
-    name: "guestbook",
-  },
-};
+  // "/blog": {
+  //   name: "blog",
+  // },
+  // "/guestbook": {
+  //   name: "guestbook",
+  // },
+}
 
 function Logo() {
   return (
@@ -42,7 +45,7 @@ function Logo() {
           }}
           transition={{
             duration: 0.5,
-            type: "spring",
+            type: 'spring',
             stiffness: 50,
           }}
           d="M39 316V0"
@@ -54,7 +57,7 @@ function Logo() {
           animate={{ x: 0, opacity: 1 }}
           transition={{
             duration: 0.5,
-            type: "spring",
+            type: 'spring',
             stiffness: 50,
           }}
           d="M232 314.998H129.852L232 232.887V314.998Z"
@@ -62,13 +65,13 @@ function Logo() {
         />
       </motion.svg>
     </Link>
-  );
+  )
 }
 
 export default function Navbar() {
-  let pathname = usePathname() || "/";
-  if (pathname.includes("/blog/")) {
-    pathname = "/blog";
+  let pathname = usePathname() || '/'
+  if (pathname.includes('/blog/')) {
+    pathname = '/blog'
   }
 
   return (
@@ -84,16 +87,16 @@ export default function Navbar() {
           >
             <div className="flex flex-row md:flex-col space-x-0 pr-10 mb-2 mt-2 md:mt-0">
               {Object.entries(navItems).map(([path, { name }]) => {
-                const isActive = path === pathname;
+                const isActive = path === pathname
                 return (
                   <Link
                     key={path}
                     href={path}
                     className={clsx(
-                      "transition-all hover:text-neutral-800 dark:hover:text-neutral-200 flex align-middle",
+                      'transition-all hover:text-neutral-800 dark:hover:text-neutral-200 flex align-middle',
                       {
-                        "text-neutral-500": !isActive,
-                        "font-bold": isActive,
+                        'text-neutral-500': !isActive,
+                        'font-bold': isActive,
                       }
                     )}
                   >
@@ -104,7 +107,7 @@ export default function Navbar() {
                           className="absolute inset-0 bg-neutral-100 dark:bg-neutral-800 rounded-md z-[-1]"
                           layoutId="sidebar"
                           transition={{
-                            type: "spring",
+                            type: 'spring',
                             stiffness: 350,
                             damping: 30,
                           }}
@@ -112,12 +115,12 @@ export default function Navbar() {
                       ) : null}
                     </span>
                   </Link>
-                );
+                )
               })}
             </div>
           </nav>
         </LayoutGroup>
       </div>
     </aside>
-  );
+  )
 }
