@@ -5,8 +5,8 @@ export const avatar = me
 export const about = () => {
   return (
     <>
-      Hey, I'm Lee. I'm the <b>VP of Developer Experience at Vercel</b> where my
-      team helps developers build a faster web.
+      Hey, I'm Simon. I'm the <b>VP of Developer Experience at Vercel</b> where
+      my team helps developers build a faster web.
     </>
   )
 }

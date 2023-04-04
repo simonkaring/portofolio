@@ -53,10 +53,10 @@ export default async function HomePage() {
             <GitHubIcon />
             {`${starCount.toLocaleString()} stars on this repo`}
           </a>
-          <Link href="/blog" className="flex items-center">
+          {/* <Link href="/blog" className="flex items-center">
             <ViewsIcon />
             {`${views.toLocaleString()} blog views all time`}
-          </Link>
+          </Link> */}
         </div>
       </div>
       <p className="my-5 max-w-[600px] text-neutral-800 dark:text-neutral-200">
