@@ -3,6 +3,7 @@ import Image from 'next/image'
 import { getBlogViews, getTweetCount, getStarCount } from 'lib/metrics'
 import { ArrowIcon, GitHubIcon, TwitterIcon, ViewsIcon } from 'components/icons'
 import { name, about, bio, avatar } from 'lib/info'
+import AboutPage from './about/page'
 
 export const revalidate = 60
 
