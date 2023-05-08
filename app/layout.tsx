@@ -20,7 +20,7 @@ export const metadata: Metadata = {
   description: 'Developer, writer, and creator.',
   openGraph: {
     title: 'Simon Karing',
-    description: 'Developer, writer, and creator.',
+    description: 'Developer',
     url: 'https://leerob.io',
     siteName: 'Simon Karing',
     images: [
