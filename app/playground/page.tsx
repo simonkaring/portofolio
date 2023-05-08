@@ -1,14 +1,8 @@
 import type { Metadata } from 'next'
-import {
-  GitHubIcon,
-  YoutubeIcon,
-  ArrowIcon,
-  TwitterIcon,
-} from 'components/icons'
 
 export const metadata: Metadata = {
   title: 'Playground',
-  description: 'VP of Developer Experience at Vercel.',
+  description: 'A playground for testing new features',
 }
 
 export default function PlaygroundPage() {
