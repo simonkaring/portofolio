@@ -21,7 +21,8 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'Simon Karing',
     description: 'Developer',
-    url: 'https://leerob.io',
+    //change to deployed url when finished
+    url: 'https://portofolio-git-main-simonkaring.vercel.app/',
     siteName: 'Simon Karing',
     images: [
       {

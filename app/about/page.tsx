@@ -17,7 +17,7 @@ export default function AboutPage() {
     <section>
       <h1 className="font-bold text-3xl font-serif">About Me</h1>
       <p className="my-5 text-neutral-800 dark:text-neutral-200">
-        Hey, I'm Simon. Most folks know me as <b>duq</b> online.
+        Hey, I'm Simon.
       </p>
       <div className="prose prose-neutral dark:prose-invert text-neutral-800 dark:text-neutral-200">
         <p>
@@ -34,8 +34,8 @@ export default function AboutPage() {
         </p>
         <p>
           I <b>love</b> building for the web. From something as simple as a
-          single HTML file – all the way to Next.js applications and mobile
-          applications.
+          single HTML file – all the way to Next.js applications and react
+          native mobile applications.
         </p>
         <div className="flex flex-col gap-2 md:flex-row md:gap-2">
           <a
